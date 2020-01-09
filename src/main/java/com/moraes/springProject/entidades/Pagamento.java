@@ -1,5 +1,6 @@
 package com.moraes.springProject.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -21,6 +22,7 @@ public class Pagamento implements Serializable {
     private Long id;
     private Instant momento;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     @JoinColumn(name = "pedido_FK")
