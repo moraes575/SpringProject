@@ -1,8 +1,10 @@
 package com.moraes.springProject.config;
 
+import com.moraes.springProject.entidades.Categoria;
 import com.moraes.springProject.entidades.Pedido;
 import com.moraes.springProject.entidades.Usuario;
 import com.moraes.springProject.entidades.enums.PedidoStatus;
+import com.moraes.springProject.repositories.CategoriaRepository;
 import com.moraes.springProject.repositories.PedidoRepository;
 import com.moraes.springProject.repositories.UsuarioRepository;
 import java.time.Instant;
@@ -22,8 +24,17 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
     @Override
     public void run(String... args) throws Exception {
+
+        Categoria cat1 = new Categoria(null, "Eletrônicos");
+        Categoria cat2 = new Categoria(null, "Livros");
+        Categoria cat3 = new Categoria(null, "Computadores");
+
+        categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 
         Usuario u1 = new Usuario(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         Usuario u2 = new Usuario(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
