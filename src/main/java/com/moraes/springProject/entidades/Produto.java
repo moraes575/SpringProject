@@ -1,5 +1,6 @@
 package com.moraes.springProject.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +32,9 @@ public class Produto implements Serializable {
             joinColumns = @JoinColumn(name = "produto_FK"),
             inverseJoinColumns = @JoinColumn(name = "categoria_FK"))
     private Set<Categoria> categorias = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itens = new HashSet<>();
 
     public Produto() {
     }
@@ -84,6 +89,15 @@ public class Produto implements Serializable {
 
     public Set<Categoria> getCategorias() {
         return categorias;
+    }
+
+    @JsonIgnore
+    public Set<Pedido> getPedidos() {
+        Set<Pedido> set = new HashSet<>();
+        for (ItemPedido x : itens) {
+            set.add(x.getPedido());
+        }
+        return set;
     }
 
     @Override
