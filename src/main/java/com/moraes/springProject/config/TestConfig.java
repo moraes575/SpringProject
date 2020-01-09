@@ -1,11 +1,13 @@
 package com.moraes.springProject.config;
 
 import com.moraes.springProject.entidades.Categoria;
+import com.moraes.springProject.entidades.ItemPedido;
 import com.moraes.springProject.entidades.Pedido;
 import com.moraes.springProject.entidades.Produto;
 import com.moraes.springProject.entidades.Usuario;
 import com.moraes.springProject.entidades.enums.PedidoStatus;
 import com.moraes.springProject.repositories.CategoriaRepository;
+import com.moraes.springProject.repositories.ItemPedidoRepository;
 import com.moraes.springProject.repositories.PedidoRepository;
 import com.moraes.springProject.repositories.ProdutoRepository;
 import com.moraes.springProject.repositories.UsuarioRepository;
@@ -31,6 +33,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -66,6 +71,13 @@ public class TestConfig implements CommandLineRunner {
 
         usuarioRepository.saveAll(Arrays.asList(u1, u2));
         pedidoRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        ItemPedido ip1 = new ItemPedido(p1, pr1, 2, pr1.getPreco());
+        ItemPedido ip2 = new ItemPedido(p1, pr3, 1, pr3.getPreco());
+        ItemPedido ip3 = new ItemPedido(p2, pr3, 2, pr3.getPreco());
+        ItemPedido ip4 = new ItemPedido(p3, pr5, 2, pr5.getPreco());
+
+        itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4));
 
     }
 

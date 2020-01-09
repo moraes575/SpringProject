@@ -1,5 +1,6 @@
 package com.moraes.springProject.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.moraes.springProject.entidades.pk.ItemPedidoPK;
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,7 +13,8 @@ import javax.persistence.Table;
 public class ItemPedido implements Serializable {
 
     @EmbeddedId
-    private ItemPedidoPK id;
+    private ItemPedidoPK id = new ItemPedidoPK();
+
     private Integer quantidade;
     private Double preco;
 
@@ -26,6 +28,7 @@ public class ItemPedido implements Serializable {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public Pedido getPedido() {
         return id.getPedido();
     }
