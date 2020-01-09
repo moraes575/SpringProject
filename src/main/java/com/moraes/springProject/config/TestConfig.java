@@ -2,6 +2,7 @@ package com.moraes.springProject.config;
 
 import com.moraes.springProject.entidades.Categoria;
 import com.moraes.springProject.entidades.ItemPedido;
+import com.moraes.springProject.entidades.Pagamento;
 import com.moraes.springProject.entidades.Pedido;
 import com.moraes.springProject.entidades.Produto;
 import com.moraes.springProject.entidades.Usuario;
@@ -78,6 +79,11 @@ public class TestConfig implements CommandLineRunner {
         ItemPedido ip4 = new ItemPedido(p3, pr5, 2, pr5.getPreco());
 
         itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4));
+
+        Pagamento pag1 = new Pagamento(null, Instant.parse("2019-06-20T21:53:07Z"), p1);
+        p1.setPagamento(pag1);
+
+        pedidoRepository.save(p1);
 
     }
 
