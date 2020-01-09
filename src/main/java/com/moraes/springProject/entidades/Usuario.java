@@ -1,5 +1,6 @@
 package com.moraes.springProject.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Usuario implements Serializable {
     private String telefone;
     private String senha;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
